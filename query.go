@@ -198,9 +198,11 @@ func writeArgumentType(w io.Writer, t reflect.Type, v interface{}, value bool) {
 		_, _ = io.WriteString(w, "[")
 		writeArgumentType(w, t.Elem(), nil, true)
 		_, _ = io.WriteString(w, "]")
-	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64,
-		reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32,
+		reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32:
 		_, _ = io.WriteString(w, "Int")
+	case reflect.Int64, reflect.Uint64:
+		_, _ = io.WriteString(w, "bigint")
 	case reflect.Float32, reflect.Float64:
 		_, _ = io.WriteString(w, "Float")
 	case reflect.Bool:
